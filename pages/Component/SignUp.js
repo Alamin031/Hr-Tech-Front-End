@@ -1,6 +1,7 @@
 // components/SignUp.js
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Header from '../Layout/header';
 import Layout from '../Layout/layout';
 
@@ -48,19 +49,30 @@ const SignUp = () => {
     }));
   };
 
-
-
-
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm(formData);
     setErrors(validationErrors);
-
+  
     if (Object.keys(validationErrors).length === 0) {
-      // Form submission logic here (e.g., API call)
-      console.log('Form submitted successfully:', formData);
-      alert("Thanks for signing up! You will receive an email shortly.");
+      try {
+        const response = await axios.post('http://localhost:3000/customer/registration', formData);
+        if (response.status === 200) {
+          // API call was successful
+          console.log('Form submitted successfully:', response.data);
+          alert('Thanks for signing up! You will receive an email shortly.');
+          // Redirect to the success page or any other necessary action
+          router.push('/success'); // Replace '/success' with the actual path of my success page
+        } else {
+          // API call failed
+          console.log('Form submission error:', response.data);
+          alert('Form submission failed. Please try again later.');
+        }
+      } catch (error) {
+        // Error occurred while making the API call
+        console.error('Form submission error:', error);
+        alert('An error occurred. Please try again later.');
+      }
     }
   };
 
