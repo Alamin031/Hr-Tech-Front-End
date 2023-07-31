@@ -1,4 +1,3 @@
-// pages/profile.js
 import Layout from '../Layout/layout';
 
 import Link from 'next/link';
@@ -11,10 +10,10 @@ const initialProfileData = {
     email: 'mridoy031@gmail.com',
     address: 'Dhaka, City, Country',
     phoneNumber: '01788788256',
-    gender: 'male', // Default value for gender
-    interests: ['sports', 'reading '],
-    country: 'BD', // Default value for country
-    profilePicture: '', // Will store the URL of the profile picture
+    gender: 'male', 
+    interests: ['sports', 'reading'],
+    country: 'BD', 
+    profilePicture: '', 
   };
 
 

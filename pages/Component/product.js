@@ -21,7 +21,7 @@ const products = [
       href: '#',
       price: '$89',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+      imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
       id: 4,
@@ -37,7 +37,11 @@ const products = [
   
   export default function Products() {
     return (
+
       <div className="bg-white">
+          <img src="images/logo.png" alt="My Project Image" />
+
+
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="sr-only">Products</h2>
   
