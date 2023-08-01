@@ -1,12 +1,3 @@
-
-// export default function showOrder() {
-//   return (
-//     <div>
-//         <h1>hello</h1>
-      
-//     </div>
-//   )
-// }
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
@@ -20,7 +11,7 @@ const OrderList = () => {
     const fetchOrders = async () => {
       try {
         // Replace this with your actual API endpoint to fetch orders
-        const response = await fetch('https://example-api.com/orders');
+        const response = await fetch('http://localhost:3000/customer/order');
         const data = await response.json();
         setOrders(data);
       } catch (error) {
