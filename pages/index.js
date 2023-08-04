@@ -39,6 +39,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
+
     <Title page="Home"></Title>
      <Layout>
       {/* <Header page="Home"></Header> */}
@@ -49,6 +50,9 @@ export default function Home() {
       <Link href="/Component/SignUp">SignUp</Link> */}
       &emsp;
       </Layout>
+
     </>
   )
 }
+
+
