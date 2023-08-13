@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { el } from 'date-fns/locale';
 
 
-const SignUpForm = () => {
+const addproduct = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -383,4 +383,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default addproduct;

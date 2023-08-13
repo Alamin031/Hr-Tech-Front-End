@@ -338,7 +338,7 @@ const SignUpForm = () => {
             className="mt-1 block w-full py-2 px-3 border rounded-md focus:ring focus:ring-opacity-50"
           >
             <option value="" disabled>Select country</option>
-            <option value="bd">Bangladesh</option>
+            <option value="usa">United States</option>
             <option value="canada">Canada</option>
             <option value="uk">United Kingdom</option>
             {/* Add more options as needed */}

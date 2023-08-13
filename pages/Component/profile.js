@@ -23,7 +23,7 @@ const initialProfileData = {
 
 
   const ProfilePage = () => {
-    const customerid = 20; // Replace this with the actual user ID (i can get it from the logged-in user or from URL parameters)
+    const customerid = 53; // Replace this with the actual user ID (i can get it from the logged-in user or from URL parameters)
     const [profileData, setProfileData] = useState(initialProfileData);
     const [loading, setLoading] = useState(true);
     const [previewImage, setPreviewImage] = useState('');            // State to store the preview image URL
@@ -132,17 +132,17 @@ const initialProfileData = {
       errors.password = 'Password must be at least 8 characters long';
     }
   
-    // if (!data.gender) {
-    //   errors.gender = 'Gender cannot be empty';
-    // }
+    if (!data.gender) {
+      errors.gender = 'Gender cannot be empty';
+    }
   
-    // if (!data.interests || data.interests.length === 0) {
-    //   errors.interests = 'Select at least one interest';
-    // }
+    if (!data.interests || data.interests.length === 0) {
+      errors.interests = 'Select at least one interest';
+    }
   
-    // if (!data.country) {
-    //   errors.country = 'Country cannot be empty';
-    // }
+    if (!data.country) {
+      errors.country = 'Country cannot be empty';
+    }
   
     // if (!data.profilePicture) {
     //   errors.profilePicture = 'Profile picture cannot be empty';
@@ -252,7 +252,7 @@ const initialProfileData = {
           <div className="mb-4">
             <label className="block text-lg font-semibold">dateOfBirth:</label>
             <input
-              type="text"
+              type="date"
               name="dateOfBirth"
               value={isEditing ? updatedProfileData.dateOfBirth : profileData.dateOfBirth}
               readOnly={!isEditing}
@@ -303,17 +303,62 @@ const initialProfileData = {
                 </div>
               </div>
             </div>
-
-          {/* <div className="mb-4">
-              <label className="block text-lg font-semibold">Profile Picture:</label>
-              <input
-                type="test"
-                name="profilePic"
-                onChange={handleInputChange}
-                className="border border-gray-400 p-2 w-full rounded focus:outline-none focus:border-blue-500"
-              />
-            </div> */}
+{isEditing ? (
+                // Editable gender radio buttons
+                <div className="mb-4">
+                  <label className="block text-lg font-semibold">Gender:</label>
+                  <div>
+                    <label className="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        checked={updatedProfileData.gender === 'male'}
+                        onChange={handleInputChange}
+                        className="form-radio text-blue-500 h-4 w-4"
+                      />
+                      <span className="ml-2">Male</span>
+                    </label>
+                    <label className="inline-flex items-center ml-6">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="female"
+                        checked={updatedProfileData.gender === 'female'}
+                        onChange={handleInputChange}
+                        className="form-radio text-blue-500 h-4 w-4"
+                      />
+                      <span className="ml-2">Female</span>
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                // Read-only gender display
+                <div className="mb-4">
+                  <label className="block text-lg font-semibold">Gender:</label>
+                  <p>{profileData.gender} </p>
+                </div>
+              )}
           <div className="mb-4">
+            <label className="block text-lg font-semibold">Country:</label>
+            <select
+            name="country"
+            value={isEditing ? updatedProfileData.country : profileData.country}
+            readOnly={!isEditing}
+            onChange={handleInputChange}
+            className="border border-gray-400 p-2 w-full rounded focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select a country</option>
+              <option value="bd">Bangladesh</option>
+              <option value="canada">Canada</option>
+              <option value="uk">United Kingdom</option>
+              {/* Add more country options as needed */}
+              </select>
+              {errors.country && <p className="text-red-500">{errors.country}</p>}
+              </div>
+              <img src='http://localhost:3000/customer/getimagebycustomerid/53'/>
+            
+                <div className="mb-4">
                 <label className="block text-lg font-semibold">Profile Picture:</label>
                 {previewImage && <img src={previewImage} alt="Profile Picture" className="mb-4" />}
                 <input

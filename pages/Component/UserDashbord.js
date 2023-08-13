@@ -1,16 +1,15 @@
-import Layout from "../Layout/layout"
-// import AccountMenu from "./AccountMenu"
-import SideNavbar from "./SideNavbar"
-
+// import SideNavbar from "./SideNavbar"
+import CustomerNavbar from "./customerNavbar"
 
 
 export default function Dashboard() {
     return (
       <>
-      <Layout>
-      <SideNavbar /> 
-      {/* <AccountMenu /> */}
-        </Layout>
+      <div>
+        <CustomerNavbar/>
+     {/* <SideNavbar/> */}
+
+      </div>
      
       </>
     )

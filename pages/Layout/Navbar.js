@@ -1,64 +1,68 @@
-
 import React from 'react';
 
 const Navbar = () => {
   return (
-    <nav className="navbar bg-blue-500 text-white">
-      <ul className="nav-links container mx-auto flex space-x-4">
-        <li className="dropdown hidden">
-          <a href="/Desktop">Desktop</a>
-          <ul className="dropdown-content">
-            {/* Sub-dropdowns for Desktop */}
-          </ul>
-        </li>
-
-        <li className="dropdown">
-          <a href="/Desktop">Laptop</a>
-          <ul className="dropdown-content">
-            {/* Sub-dropdowns for Laptop */}
-          </ul>
-        </li>
-
-        <li className="dropdown">
-          <a href="/Component">Component</a>
-          <ul className="dropdown-content">
-            {/* Sub-dropdowns for Component */}
-          </ul>
-        </li>
-
-        <li className="dropdown ">
-          <a href="/services">Services</a>
-          <ul className="dropdown-content hidden">
+    <div className="navbar bg-sky-600">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </label>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a>Item 1</a></li>
             <li>
-              <a href="/services/web">Web Development</a>
-            </li>
-            <li>
-              <a href="/services/mobile">Mobile App Development</a>
-            </li>
-            <li className="sub-dropdown">
-              <a href="/services/design">Design Services</a>
-              <ul className="sub-dropdown-content">
+              <a>Parent</a>
+              <ul className="p-2">
+                <li><a>Submenu 1</a></li>
+                <li><a>Submenu 2</a></li>
+                {/* Additional Submenu */}
                 <li>
-                  <a href="/services/design/logo">Logo Design</a>
+                  <a>Submenu 3</a>
+                  <ul className="p-2">
+                    <li><a>Sub-submenu 1</a></li>
+                    <li><a>Sub-submenu 2</a></li>
+                  </ul>
                 </li>
-                <li>
-                  <a href="/services/design/graphics">Graphic Design</a>
-                </li>
-                <li>
-                  <a href="/services/design/ui">UI/UX Design</a>
-                </li>
+                {/* End of Additional Submenu */}
               </ul>
             </li>
+            <li><a>Item 3</a></li>
           </ul>
-        </li>
+        </div>
+        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+      </div>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li><a>Item 1</a></li>
+          <li tabIndex={0}>
+            <details>
+              <summary>Parent</summary>
+              <ul className="p-2">
+                <li><a>Submenu 1</a></li>
+                <li><a>Submenu 2</a></li>
+                <li tabIndex={0}>
+                  <details>
+                    <summary>Submenu 3</summary>
+                    <ul className="p-2">
+                      <li><a>Sub-submenu 1</a></li>
+                      <li><a>Sub-submenu 2</a></li>
+                      </ul>
+                  </details>
+                </li>
 
-        <li>
-          <a href="/contact">Contact</a>
-        </li>
-      </ul>
-    </nav>
+              </ul>
+            </details>
+          </li>
+          <li><a>Item 3</a></li>
+        </ul>
+      </div>
+      <div className="navbar-end">
+        <a className="btn">Button</a>
+      </div>
+    </div>
   );
 };
 
 export default Navbar;
-

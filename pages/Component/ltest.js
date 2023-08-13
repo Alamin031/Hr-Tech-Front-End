@@ -24,7 +24,7 @@ const LoginForm = () => {
       let response;
 
       if (userType === 'admin') {
-        const  response = await axios.post('http://localhost:3000/admin/login', // Update the admin login API endpoint
+        const  response = await axios.post('http://localhost:3000/admin/signin', // Update the admin login API endpoint
           {
             email: email,
             password: password,
@@ -40,7 +40,7 @@ const LoginForm = () => {
         setLoggedIn(true);
         setLoading(false);
         console.log('Login successful');
-        router.push('/Component/UserDashbord1'); // Redirect to the dashboard page
+        router.push('/Component/admin/adminDashbord'); // Redirect to the dashboard page
 
       }
        else {
@@ -65,7 +65,11 @@ const LoginForm = () => {
       router.push('/Component/UserDashbord'); // Redirect to the dashboard page
       console.log('Login successful');
 
-
+      // if (userData.role === 'customer') {
+      //   router.push('/Component/UserDashbord');
+      // } else if (userData.role === 'admin') {
+      //   router.push('/Component/admin/adminDashbord'); 
+      // }
       
 
      
@@ -81,10 +85,10 @@ const LoginForm = () => {
     if (localStorage.getItem('userData')) {
       const userData = JSON.parse(localStorage.getItem('userData'));
       if (userData.role === 'customer') {
-        router.push('/Component/UserDashboard');
-      } else if (userData.role === 'admin') {
-        router.push('/Component/AdminDashboard');
-      }
+        router.push('/Component/UserDashbord');
+    } else if (userData.role === 'admin') {
+        router.push('/Component/admin/adminDashbord'); 
+    }
     }
 
     return null; // No need to render anything in this case
@@ -96,9 +100,6 @@ const LoginForm = () => {
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
           <form className="p-8 bg-white shadow-md rounded-md" onSubmit={handleSubmit}>
             <h2 className="mb-4 text-2xl font-semibold text-center">Login</h2>
-
-            {/* ... (input fields for email, password, and username) */}
-
             <div className="mb-4">
               <label className="block mb-2 text-sm font-medium">User Type</label>
               <div className="flex items-center">
