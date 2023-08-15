@@ -53,22 +53,22 @@ const Header = () => {
   };
 
   return (
-    <header className="header flex items-center justify-between bg-gray-800 text-white py-4 px-6">
+    <header className="header flex items-center justify-between bg-slate-200 text-black border-2 border-slate-200 px-6">
       <div className="logo">
         <img src="/logo.png" alt="Logo" className="w-20 h-15" />
       </div>
-      <nav className="navigation py-1">
-        <ul className="flex">
-          <li className="px-20 py-1">
+      <nav className="navigation ml-60">
+        <ul className="flex pr-20">
+          <li className="px-6 py-1 ">
              <a href="/" className="hover:text-gray-300 font-bold">Home</a>
            </li>
-           <li className="px-20 py-1">
+           <li className="px-6 py-1">
              <a href="/Offer" className="hover:text-gray-300 font-bold">Offer</a>
            </li>
-           <li className="px-20 py-1">
+           <li className="px-6 py-1">
              <a href="/desktop-deal" className="hover:text-gray-300 font-bold">Desktop Deal</a>
            </li>
-           <li className="px-20 py-1">
+           <li className="px-6 py-1">
             <a href="/Component/LoginForm" className="hover:text-gray-300 font-bold">Account</a>
            </li>       
             </ul>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-sky-600">
+    <div className="navbar bg-slate-300">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -11,43 +11,138 @@ const Navbar = () => {
             </svg>
           </label>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Item 1</a></li>
+            <li><a>Desktop</a></li>
             <li>
-              <a>Parent</a>
+              <a>Laptop</a>
               <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-                {/* Additional Submenu */}
-                <li>
-                  <a>Submenu 3</a>
-                  <ul className="p-2">
-                    <li><a>Sub-submenu 1</a></li>
-                    <li><a>Sub-submenu 2</a></li>
+                <li><a>All Laptop</a></li>
+                <li><a>Gaming Laptop</a>
+                <ul className="p-2">
+                    <li><a>Acer</a></li>
+                    <li><a>MSI</a></li>
+                    <li><a>HP</a></li>
+                    <li><a>Lenovo</a></li>
+                    <li><a>GIGABYTE</a></li>
+                    <li><a>MSI</a></li>
                   </ul>
                 </li>
-                {/* End of Additional Submenu */}
+                <li>
+                  <a>Premium Ultrabook</a>
+                  <ul className="p-2">
+                    <li><a>Samsung</a></li>
+                    <li><a>Microsoft</a></li>
+                    <li><a>Acer</a></li>
+                    <li><a>MSI</a></li>
+                    <li><a>HP</a></li>
+                    <li><a>Lenovo</a></li>
+                    <li><a>GIGABYTE</a></li>
+                    <li><a>MSI</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Laptop Bag</a>
+                  <ul className="p-2">
+                    <li><a>Samsung</a></li>
+                    <li><a>Microsoft</a></li>
+                    <li><a>Acer</a></li>
+                    <li><a>MSI</a></li>
+                    <li><a>HP</a></li>
+                    <li><a>Lenovo</a></li>
+                    <li><a>GIGABYTE</a></li>
+                    <li><a>MSI</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Laptop Accessories</a>
+                  <ul className="p-2">
+                    <li><a>Samsung</a></li>
+                    <li><a>Microsoft</a></li>
+                    <li><a>Acer</a></li>
+                    <li><a>MSI</a></li>
+                    <li><a>HP</a></li>
+                    <li><a>Lenovo</a></li>
+                    <li><a>GIGABYTE</a></li>
+                    <li><a>MSI</a></li>
+                  </ul>
+                </li>
               </ul>
             </li>
-            <li><a>Item 3</a></li>
+            <li><a>Component</a></li>
+            <li><a>Monitor</a></li>
+            <li><a>UPS</a></li>
+            <li><a>Phone</a></li>
+            <li><a>Tablet</a></li>
+            <li><a>Camera</a></li>
+            <li><a>Security</a></li>
+            <li><a>Networking</a></li>
+            <li><a>Software</a></li>
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li><a>Item 1</a></li>
+          <li><a>Desktop</a></li>
           <li tabIndex={0}>
             <details>
-              <summary>Parent</summary>
+              <summary>Laptop</summary>
               <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
+                <li><a>All Laptop</a></li>
                 <li tabIndex={0}>
                   <details>
-                    <summary>Submenu 3</summary>
+                    <summary>Gaming Laptop</summary>
                     <ul className="p-2">
-                      <li><a>Sub-submenu 1</a></li>
-                      <li><a>Sub-submenu 2</a></li>
+                      <li><a>Acer</a></li>
+                      <li><a>MSI</a></li>
+                      <li><a>HP</a></li>
+                      <li><a>Lenovo</a></li>
+                      <li><a>GIGABYTE</a></li>
+                      <li><a>MSI</a></li>
+                    </ul>
+                  </details>
+                </li>
+                <li tabIndex={0}>
+                  <details>
+                    <summary>Premium Ultrabook</summary>
+                    <ul className="p-2">
+                      <li><a>Samsung</a></li>
+                      <li><a>Microsoft</a></li>
+                      <li><a>Acer</a></li>
+                      <li><a>MSI</a></li>
+                      <li><a>HP</a></li>
+                      <li><a>Lenovo</a></li>
+                      <li><a>GIGABYTE</a></li>
+                      <li><a>MSI</a></li>
+                    </ul>
+                  </details>
+                </li>
+                <li tabIndex={0}>
+                  <details>
+                    <summary>Laptop Bag</summary>
+                    <ul className="p-2">
+                      <li><a>Samsung</a></li>
+                      <li><a>Microsoft</a></li>
+                      <li><a>Acer</a></li>
+                      <li><a>MSI</a></li>
+                      <li><a>HP</a></li>
+                      <li><a>Lenovo</a></li>
+                      <li><a>GIGABYTE</a></li>
+                      <li><a>MSI</a></li>
+                    </ul>
+                  </details>
+                </li>
+                <li tabIndex={0}>
+                  <details>
+                    <summary>Laptop Accessories</summary>
+                    <ul className="p-2">
+                    <li><a>Samsung</a></li>
+                    <li><a>Microsoft</a></li>
+                    <li><a>Acer</a></li>
+                    <li><a>MSI</a></li>
+                    <li><a>HP</a></li>
+                    <li><a>Lenovo</a></li>
+                    <li><a>GIGABYTE</a></li>
+                    <li><a>MSI</a></li>
                       </ul>
                   </details>
                 </li>
@@ -55,8 +150,16 @@ const Navbar = () => {
               </ul>
             </details>
           </li>
-          <li><a>Item 3</a></li>
-        </ul>
+            <li><a>Component</a></li>
+            <li><a>Monitor</a></li>
+            <li><a>UPS</a></li>
+            <li><a>Phone</a></li>
+            <li><a>Tablet</a></li>
+            <li><a>Camera</a></li>
+            <li><a>Security</a></li>
+            <li><a>Networking</a></li>
+            <li><a>Software</a></li>
+         </ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>

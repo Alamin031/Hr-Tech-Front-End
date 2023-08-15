@@ -1,11 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import Products from './Component/product'
-import TNavbar from './Layout/TNavbar'
+import ProductForm from './Component/ProductList'
+// import Products from './Component/product'
 const Layout = dynamic(() => import('./Layout/layout'), {
   ssr: false
 })
@@ -21,13 +17,12 @@ export default function Home() {
 
     <Title page="Home"></Title>
      <Layout>
-      <TNavbar />
       {/* <Header page="Home"></Header> */}
       <br></br>
+      
+      <ProductForm/>
       {/* <FeaturedCategory /> */}
-      <Products />
-      {/* <Link href="/about">About</Link>
-      <Link href="/Component/SignUp">SignUp</Link> */}
+      {/* <Products /> */}
       &emsp;
       </Layout>
 

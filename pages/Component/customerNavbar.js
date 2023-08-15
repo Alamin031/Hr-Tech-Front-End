@@ -7,7 +7,7 @@ import SideNavbar from "./SideNavbar";
         
   <div className="navbar bg-slate-200">
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+    <a className="btn btn-ghost normal-case text-xl">Hr Tech</a>
   </div>
   
   <div className="flex-none gap-2">
