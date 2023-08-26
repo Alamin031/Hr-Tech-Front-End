@@ -5,7 +5,8 @@ import SideNavbar from './SideNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import axios from 'axios';
-
+import CustomerNavbar from './customerNavbar';
+import Footer from '../Layout/Footer';
 const initialProfileData = {
   firstName: '',
   lastName: '',
@@ -23,7 +24,7 @@ const initialProfileData = {
 
 
   const ProfilePage = () => {
-    const customerid = 53; // Replace this with the actual user ID (i can get it from the logged-in user or from URL parameters)
+    const customerid = 55; // Replace this with the actual user ID (i can get it from the logged-in user or from URL parameters)
     const [profileData, setProfileData] = useState(initialProfileData);
     const [loading, setLoading] = useState(true);
     const [previewImage, setPreviewImage] = useState('');            // State to store the preview image URL
@@ -205,11 +206,10 @@ const initialProfileData = {
   }
 
   return (
-    <div className="">
-    <Layout>
-    <SideNavbar/>
-    {/* min-h-screen  */}
-    <div className=" p-8 -mt-96">
+    <> 
+      <CustomerNavbar/>
+    <div className=" p-8 mt-96">
+    {/* <div className=""> */}
       <div className="max-w-md mx-auto bg-white rounded p-8 shadow-md -mt-96 ">
         <h2 className="text-2xl font-bold mb-4">User Profile</h2>
         <div>
@@ -356,7 +356,7 @@ const initialProfileData = {
               </select>
               {errors.country && <p className="text-red-500">{errors.country}</p>}
               </div>
-              <img src='http://localhost:3000/customer/getimagebycustomerid/53'/>
+              <img src='http://localhost:3000/customer/getimagebycustomerid/55'/>
             
                 <div className="mb-4">
                 <label className="block text-lg font-semibold">Profile Picture:</label>
@@ -412,8 +412,8 @@ const initialProfileData = {
       )}
           </div>
         </div>
-      </Layout>
-    </div>
+        <Footer/>
+        </>
   );
 };
 

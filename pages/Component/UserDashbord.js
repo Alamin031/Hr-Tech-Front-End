@@ -1,5 +1,8 @@
-// import SideNavbar from "./SideNavbar"
+import SideNavbar from "./SideNavbar"
 import CustomerNavbar from "./customerNavbar"
+import ProductForm from "./ProductList"
+import Footer from "../Layout/Footer"
+import CardComponent from "./test"
 
 
 export default function Dashboard() {
@@ -7,7 +10,9 @@ export default function Dashboard() {
       <>
       <div>
         <CustomerNavbar/>
-     {/* <SideNavbar/> */}
+        <SideNavbar/>
+        <CardComponent/>
+        <Footer/>
 
       </div>
      

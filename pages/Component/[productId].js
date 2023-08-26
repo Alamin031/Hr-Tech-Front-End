@@ -58,7 +58,6 @@ const ProductPage = () => {
 
   return (
     <div>
-      <h1>Product Details</h1>
       {productDetails ? (
         <ProductDetails product={productDetails} />
       ) : (

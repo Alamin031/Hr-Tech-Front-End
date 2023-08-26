@@ -17,6 +17,7 @@ export default function Home() {
 
     <Title page="Home"></Title>
      <Layout>
+
       {/* <Header page="Home"></Header> */}
       <br></br>
       

@@ -36,7 +36,7 @@ function ProductForm() {
                 />
               </Link>
               <div className="card-body">
-                <Link href={`/products/${product.id}`}>
+                <Link href={`/Component/${product.id}`}>
                   <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     {product.Product_Name}
                     <div className="badge badge-secondary">NEW</div>
