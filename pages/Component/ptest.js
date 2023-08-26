@@ -61,32 +61,47 @@ import axios from 'axios';
 import { useAuth } from '../utils/authcontext';
 import CustomerNavbar from './customerNavbar';
 import Footer from '../Layout/Footer';
+import { useRouter } from 'next/router';
 
 const ProfilePage = () => {
   const { user } = useAuth();
+  const { checkUser } = useAuth();
+  const router = useRouter();
+
+console.log('user inside profile:', checkUser);
+  console.log('user inside profile:', user);
+
 
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+        if (!checkUser()) 
+    {
+        router.push('/');
+    }
+    else {
+      fetchProfileData();
+    }
+  }, []);
+
     const fetchProfileData = async () => {
       try {
-        if (user && user.email) {
-          console.log('Fetching profile data for:', user.email);
-          const response = await axios.get(`http://localhost:3000/customer/getuser/${user.email}`);
+          const userEmail = user.email;
+          console.log("User Email:", userEmail);
+          const response =await axios.get(`http://localhost:3000/customer/getuser/${user.email}`, {
+          withCredentials: true, 
+      });
           const profileData = response.data;
           console.log('Profile data fetched:', profileData);
           setProfileData(profileData);
         }
-      } catch (error) {
+         catch (error) {
         console.error('Error fetching profile data:', error);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchProfileData();
-  }, [user]);
 
   return (
     <>

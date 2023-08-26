@@ -35,6 +35,8 @@ const LoginForm = () => {
       });
       console.log("cookie: " + document.cookie);
       login(email, document.cookie);
+      console.log("cookie: " + document.cookie);
+      console.log("user:  " + email);
       setLoggedIn(true);
       setLoading(false);
       console.log('Login successful');

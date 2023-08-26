@@ -155,39 +155,39 @@ const CardComponent = () => {
    
     <div className="flex flex-wrap justify-center">
                    
-      {/* Show Order Card */}
-      <div className="card w-96 h-56 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="./showOrder" className="card-body text-center flex items-center justify-center">
-          <div className="mr-2">
-            <MdBorderAll className="h-6 w-6" />
-          </div>
-          <h2 className="card-title">Show Order</h2>
-        </a>
-      </div>
+    <div className="card w-96 h-56 bg-base-100 shadow-xl mb-4 mr-4">
+     <button onClick={() => router.push('./showOrder')} className="card-body text-center flex items-center justify-center btn">
+    <div className="mr-2">
+      <MdBorderAll className="h-6 w-6" />
+    </div>
+    <h2 className="card-title">Show Order</h2>
+    </button>
+   </div>
+
 
       {/* Comments Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="/comments" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./comments')} className="card-body text-center flex items-center justify-center btn">
           <div className="mr-2">
             <FaRegComments className="h-6 w-6" />
           </div>
           <h2 className="card-title">Comments</h2>
-        </a>
+        </button>
       </div>
 
       {/* Messages Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4">
-        <a href="/messages" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./messages')} className="card-body text-center flex items-center justify-center btn">
           <div className="mr-2">
             <BiMessageSquareDots className="h-6 w-6" />
           </div>
           <h2 className="card-title">Messages</h2>
-        </a>
+        </button>
       </div>
 
       {/* Send Product Card */}
       <div className="card w-96 h-56 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="/send-product" className="card-body text-center flex items-center justify-center">
+        <a href="./sendproduct" className="card-body text-center flex items-center justify-center">
           <div className="mr-2">
             <FaApple className="h-6 w-6" />
           </div>
@@ -197,7 +197,7 @@ const CardComponent = () => {
 
       {/* Show Review Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="/show-review" className="card-body text-center flex items-center justify-center">
+        <a href="./showReview" className="card-body text-center flex items-center justify-center">
           <div className="mr-2">
             <MdFeedback className="h-6 w-6" />
           </div>

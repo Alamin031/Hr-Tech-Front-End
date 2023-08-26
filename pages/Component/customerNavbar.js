@@ -11,18 +11,17 @@ const CustomerNavbar = () => {
 
 
   useEffect(() => {
-    checkSession();
+    fetchData();
   }, []);
 
-  function checkSession() {
-    if (user !== null) {
-      fetchData();
-      console.log("user:  " + user.email)
-      console.log("user:  " + user.cookie)
-    } else {
-      router.push('./LoginForm')
-    }
-  }
+  // useEffect(() => {
+    
+  //   console.log("CheckUser::::"+checkUser())
+  //   if (!checkUser()) {
+  //     router.push('/');
+  //   }
+  //   else {fetchData();}
+  // }, []);
 
   async function fetchData() {
     try {
@@ -45,7 +44,10 @@ const CustomerNavbar = () => {
     {jsonData &&
       <div className="navbar bg-slate-200">
           <div className="flex-1">
-        <a href="./UserDashbord"className="btn btn-ghost normal-case text-xl">Hr Tech</a>
+        {/* <a href="./UserDashbord"className="btn btn-ghost normal-case text-xl">Hr Tech</a> */}
+        <button onClick={() => router.push('./UserDashbord')} className="btn btn-ghost normal-case text-xl">Hr Tech</button>       
+
+        
           </div>
           <div className="flex-none gap-2">
             <div className="form-control">
@@ -84,8 +86,8 @@ const CustomerNavbar = () => {
                   {jsonData.firstName} {jsonData.lastName}
                   </a>
                 </li>
-                <li><a href="./ptest">Settings</a></li>
-                <li> <button onClick={handleLogout}>Logout</button></li>
+                <li><button onClick={() => router.push('./profile')} className="btn btn-ghost">Profile</button></li>       
+               <li> <button onClick={handleLogout}>Logout</button></li>
               </ul>
             </div>
           </div>

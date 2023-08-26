@@ -1,174 +1,156 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
-import Header from '../Layout/header';
+import axios from 'axios';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import Layout from '../Layout/layout';
+import { useRouter } from 'next/router';
 
-const SendProductPage = () => {
-  const [formData, setFormData] = useState({
-    productname: '',
-    Address: '',
-    Problem: '',
-    Date: '',
-    ProblemPicture: null,
+
+const SignUpForm = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const [error, setError] = useState('');
+
+  const formik = useFormik({
+    initialValues: {
+      Product_Name: '',
+      Problem: '',
+      Date: '',
+      Address: '',
+      profilePicture: null,
+    },
+    validationSchema: Yup.object({
+      Product_Name: Yup.string()
+      .trim()
+      .matches(/^[A-Za-z\s]+$/, 'Product Name can only contain letters and spaces')
+      .required('Product_Name is required'),
+      Problem: Yup.string()
+      .trim()
+      .matches(/^[A-Za-z\s]+$/, 'Problem can only contain letters and spaces')
+      .required('Problem  is required'),  
+      Date: Yup.date().required('Problem Date is required'),
+      Address: Yup.string()
+      .required('Address is required'),      
+      profilePicture: Yup.mixed().test(
+        'fileType',
+        'Unsupported file type',
+        
+        (value) => value && ['image/jpeg', 'image/png'].includes(value.type)
+      ),
+    }),
+    onSubmit: async (values) => {
+      setError('');
+      setLoading(true);
+
+      try {
+        const formData = new FormData();
+        Object.keys(values).forEach((key) => {
+          formData.append(key, values[key]);
+        });
+
+        const response = await axios.post('http://localhost:3000/customer/add_assign_product', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        console.log('Product Send successful', response.data);
+        alert('Thanks for sending your product! You will receive an email shortly.');
+        setLoading(false);
+        router.push('/Component/UserDashbord'); 
+
+      }catch (error) {
+        console.error(error);
+
+        if (error.response) {
+          console.error('Server Response Data:', error.response.data);
+
+         
+        } 
+        setLoading(false);
+      }
+    },
   });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
-    if (type === 'checkbox') {
-      const isChecked = checked;
-      const updatedInterests = isChecked
-        ? [...formData.interests, value]
-        : formData.interests.filter((interest) => interest !== value);
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        interests: updatedInterests,
-      }));
-    } else if (type === 'file') {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: files[0],
-      }));
-    } else {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    }
-
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-
-
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm(formData);
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
-      // Form submission logic here (e.g., API call)
-      console.log('Form submitted successfully:', formData);
-    }
-  };
-
-  const validateForm = (data) => {
-    let errors = {};
-
-    if (!data.productname.trim()) {
-      errors.productname = 'Product Name cannot be empty';
-    }
-
-    if (!data.Address.trim()) {
-      errors.Address = 'Address cannot be empty';
-    } 
-
-    if (!data.Problem.trim()) {
-      errors.Problem = 'Problem cannot be empty';
-    } 
-    if (!data.Date.trim()) {
-        errors.Date = 'Date cannot be empty';
-      } 
-
-    if (!data.ProblemPicture) {
-      errors.ProblemPicture = 'Profile picture cannot be empty';
-    }
-
-    return errors;
-  };
-
-  
-
   return (
     <div className="">
-                <Layout>
-
-
+    <Layout>
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
 
-      <form onSubmit={handleSubmit} className='bg-white shadow-md rounded-lg px-8 pt-14 pb-8 mb-4 mt-4'>
-      <h2 className="mb-4 text-2xl font-semibold text-center">Send Product Up</h2>
+    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+      <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+      <h2 className="mb-4 text-2xl font-semibold text-center">Send Product</h2>
 
-        <div className="form-group ">
-          <label>Product Name</label>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Your Product_Name:</label>
           <input
             type="text"
-            placeholder={errors.productname ? "" : "Product Name"}
-
-            name="productname"
-            value={formData.productname}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none"
+            {...formik.getFieldProps('Product_Name')}
+            className="mt-1 block w-full py-2 px-3 border rounded-md focus:ring focus:ring-opacity-50"
           />
-          {errors.productname && <span className="text-red-500 text-sm mt-1">{errors.productname}</span>}
-
+          {formik.touched.Product_Name && formik.errors.Product_Name && (
+            <div className="text-red-600 text-sm">{formik.errors.Product_Name}</div>
+          )}
         </div>
-
-
-        <div className="form-group">
-          <label>Address</label>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Problem:</label>
           <input
-            type="Address"
-            name="Address"
-            value={formData.Address}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none"
+            type="text"
+            {...formik.getFieldProps('Problem')}
+            className="mt-1 block w-full py-2 px-3 border rounded-md focus:ring focus:ring-opacity-50"
           />
-          {errors.Address && <span className="text-red-500 text-sm mt-1">{errors.Address}</span>}
-        </div>
-
-
-        <div className="form-group">
-          <label>Problem </label>
-          <input
-            type="Problem"
-            name="Problem"
-            value={formData.Problem}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none"
-          />
-          {errors.Problem && <span className="text-red-500 text-sm mt-1">{errors.Problem}</span>}
-        </div>
-        <div className="form-group">
-          <label>Problem Date</label>
-          <input
-            type="Date"
-            name="Date"
-            value={formData.Date}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none"
-          />
-          {errors.Date && <span className="text-red-500 text-sm mt-1">{errors.Date}</span>}
-        </div>
-
-        {/* File upload input for profile picture */}
-        <div className="form-group">
-          <label>Problem Picture</label>
-          <input
-            type="file"
-            name="ProblemPicture"
-            onChange={handleChange}
-            className="w-full py-2 mt-2 focus:outline-none"
-          />
-          {errors.ProblemPicture && (
-            <span className="text-red-500 text-sm mt-1">{errors.ProblemPicture}</span>
+          {formik.touched.Problem && formik.errors.Problem && (
+            <div className="text-red-600 text-sm">{formik.errors.Problem}</div>
           )}
         </div>
 
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Problem Date:</label>
+          <input
+            type="date"
+            {...formik.getFieldProps('Date')}
+            className="mt-1 block w-full py-2 px-3 border rounded-md focus:ring focus:ring-opacity-50"
+          />
+          {formik.touched.Date && formik.errors.Date && (
+            <div className="text-red-600 text-sm">{formik.errors.Date}</div>
+          )}
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Your Address:</label>
+          <input
+            type="text"
+            {...formik.getFieldProps('Address')}
+            className="mt-1 block w-full py-2 px-3 border rounded-md focus:ring focus:ring-opacity-50"
+          />
+          {formik.touched.Address && formik.errors.Address && (
+            <div className="text-red-600 text-sm">{formik.errors.Address}</div>
+          )}
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Product Photo:</label>
+          <input
+            type="file"
+            accept="image/jpeg,image/png"
+            onChange={(event) => formik.setFieldValue('profilePicture', event.currentTarget.files[0])}
+            className="mt-1 block w-full py-2 px-3 border rounded-md focus:ring focus:ring-opacity-50"
+          />
+          {formik.touched.profilePicture && formik.errors.profilePicture && (
+            <div className="text-red-600 text-sm">{formik.errors.profilePicture}</div>
+          )}
+        </div>
         <button
           type="submit"
           className="w-full px-4 py-2 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
+          disabled={loading}
         >
-          submission
+          {loading ? 'Sending Up...' : 'Send'}
         </button>
+        {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
+       
       </form>
+    </div>
+    
     </div>
     </Layout>
     </div>
@@ -176,4 +158,4 @@ const SendProductPage = () => {
   );
 };
 
-export default SendProductPage;
+export default SignUpForm;
