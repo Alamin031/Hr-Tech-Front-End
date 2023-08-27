@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/authcontext';
+import Cookies from "js-cookie"; // Import the Cookies library
+
 
 const CustomerNavbar = () => {
   const [jsonData, setJsonData] = useState(null);
@@ -33,6 +35,8 @@ const CustomerNavbar = () => {
       console.error(error);
     }
   }
+
+  
 
   const handleLogout = () => {
     logout();

@@ -524,15 +524,6 @@ const initialProfileData = {
       }));
     };
 
-    const handleTogglePassword = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
-
-  const handleProfilePicChange = (e) => {
-    const file = e.target.files[0];
-    setProfileData((prevData) => ({ ...prevData, profilePic: file }));
-    setPreviewImage(URL.createObjectURL(file));
-  };
   const handleEdit = () => {
     setIsEditing(true);
     setUpdatedProfileData(profileData);           // Save the current profileData to updatedProfileData when entering edit mode

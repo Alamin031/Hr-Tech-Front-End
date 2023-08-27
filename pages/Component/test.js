@@ -145,9 +145,13 @@ import {
   MdBorderAll,
 } from 'react-icons/md';
 import { GrTransaction } from "react-icons/gr";
+import { useRouter } from 'next/router';
+
 
 
 const CardComponent = () => {
+  const router = useRouter();
+
     const [jsonData, setJsonData] = useState('')
 
   return (
@@ -185,64 +189,66 @@ const CardComponent = () => {
         </button>
       </div>
 
+
+
       {/* Send Product Card */}
       <div className="card w-96 h-56 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="./sendproduct" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./sendproduct')} className="card-body text-center flex items-center justify-center btn">
           <div className="mr-2">
             <FaApple className="h-6 w-6" />
           </div>
           <h2 className="card-title">Send Product</h2>
-        </a>
+          </button>
       </div>
 
-      {/* Show Review Card */}
+      {/* Comments Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="./showReview" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./showReview')} className="card-body text-center flex items-center justify-center btn">
           <div className="mr-2">
-            <MdFeedback className="h-6 w-6" />
+          <MdFeedback className="h-6 w-6" />
           </div>
           <h2 className="card-title">Show Review</h2>
-        </a>
+        </button>
       </div>
-
       {/* Contact Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4">
-        <a href="/contact" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./contact')} className="card-body text-center flex items-center justify-center btn">
+
           <div className="mr-2">
             <MdOutlineSettings className="h-6 w-6" />
           </div>
           <h2 className="card-title">Contact</h2>
-        </a>
+        </button>
       </div>
 
       {/* Transaction Card */}
       <div className="card w-96 h-56 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="/transaction" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./transaction')} className="card-body text-center flex items-center justify-center btn">
           <div className="mr-2">
             <GrTransaction className="h-6 w-6" />
           </div>
           <h2 className="card-title">Transaction</h2>
-        </a>
+        </button>
       </div>
 
       {/* Wish List Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4 mr-4">
-        <a href="/wish-list" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./wish-lis')} className="card-body text-center flex items-center justify-center btn">
           <div className="mr-2">
             <MdStars className="h-6 w-6" />
           </div>
           <h2 className="card-title">Wish List</h2>
-        </a>
+        </button>
       </div>
 
       {/* Saved PC Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4">
-        <a href="/saved-pc" className="card-body text-center flex items-center justify-center">
+      <button onClick={() => router.push('./saved-pc')} className="card-body text-center flex items-center justify-center btn">
           <div className="mr-2">
             <MdBorderAll className="h-6 w-6" />
           </div>
           <h2 className="card-title">Saved PC</h2>
-        </a>
+        </button>
       </div>
     </div>
 

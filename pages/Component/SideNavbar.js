@@ -217,7 +217,9 @@ const SideNavbar = () => {
             <li><a>Software</a></li>          
             </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        {/* <a className="btn btn-ghost normal-case text-xl">Home</a> */}
+        <button onClick={() => router.push('./UserDashbord')} className="btn btn-ghost normal-case text-xl">Home</button>       
+
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

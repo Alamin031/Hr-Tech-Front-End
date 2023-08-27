@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Layout from '../Layout/layout';
 import { useRouter } from 'next/router';
+import CustomerNavbar from './customerNavbar';
+import Footer from '../Layout/Footer';
 
-
-const SignUpForm = () => {
+const SindForm = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -19,23 +19,22 @@ const SignUpForm = () => {
       Date: '',
       Address: '',
       profilePicture: null,
+      customer: 57, // Set the customer ID to 57
     },
     validationSchema: Yup.object({
       Product_Name: Yup.string()
-      .trim()
-      .matches(/^[A-Za-z\s]+$/, 'Product Name can only contain letters and spaces')
-      .required('Product_Name is required'),
+        .trim()
+        .matches(/^[A-Za-z\s]+$/, 'Product Name can only contain letters and spaces')
+        .required('Product Name is required'),
       Problem: Yup.string()
-      .trim()
-      .matches(/^[A-Za-z\s]+$/, 'Problem can only contain letters and spaces')
-      .required('Problem  is required'),  
+        .trim()
+        .matches(/^[A-Za-z\s]+$/, 'Problem can only contain letters and spaces')
+        .required('Problem is required'),
       Date: Yup.date().required('Problem Date is required'),
-      Address: Yup.string()
-      .required('Address is required'),      
+      Address: Yup.string().required('Address is required'),
       profilePicture: Yup.mixed().test(
         'fileType',
         'Unsupported file type',
-        
         (value) => value && ['image/jpeg', 'image/png'].includes(value.type)
       ),
     }),
@@ -49,32 +48,33 @@ const SignUpForm = () => {
           formData.append(key, values[key]);
         });
 
-        const response = await axios.post('http://localhost:3000/customer/add_assign_product', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        const response = await axios.post(
+          'http://localhost:3000/customer/add_assign_product',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
 
         console.log('Product Send successful', response.data);
         alert('Thanks for sending your product! You will receive an email shortly.');
         setLoading(false);
-        router.push('/Component/UserDashbord'); 
-
-      }catch (error) {
+        router.push('/Component/UserDashbord');
+      } catch (error) {
         console.error(error);
 
         if (error.response) {
           console.error('Server Response Data:', error.response.data);
-
-         
-        } 
+        }
         setLoading(false);
       }
     },
   });
   return (
     <div className="">
-    <Layout>
+      <CustomerNavbar/>
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
 
     <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
@@ -152,10 +152,10 @@ const SignUpForm = () => {
     </div>
     
     </div>
-    </Layout>
+    <Footer/>
     </div>
 
   );
 };
 
-export default SignUpForm;
+export default SindForm;

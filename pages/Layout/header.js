@@ -1,12 +1,35 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import SearchResultsModal from './SearchResultsModal';
+
 
 const Header = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
   };
 
+  const handleSearch = async () => {
+    try {
+      console.log('Searching for:', searchQuery);
+      const response = await axios.get(`http://localhost:3000/customer/search/${searchQuery}`);
+      console.log('Search results:', response.data);
+      setSearchResults(response.data);
+      setIsModalOpen(true); // Open the modal with search results
+      console.log('Search results:', searchResults);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      setSearchResults([]);
+    }
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <header className="header flex items-center justify-between bg-slate-200 text-black border-2 border-slate-200 px-6">
       <div className="logo">
@@ -29,16 +52,21 @@ const Header = () => {
             </ul>
       </nav>
       <div className="search-box flex items-center space-x-2">
-         <input
-           type="text"
-           placeholder="Search..."
-           className="px-2 py-1 border border-gray-400 rounded"
-         />
-         <button className="search-button px-4 py-1 bg-blue-500 text-white rounded">
-           Search
-         </button>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="px-2 py-1 border border-gray-400 rounded"
+        />
+        <button
+          className="search-button px-4 py-1 bg-blue-500 text-white rounded"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
       </div>
-      <button className="pc-builder-button px-4 py-1 bg-purple-600 text-white rounded">
+            <button className="pc-builder-button px-4 py-1 bg-purple-600 text-white rounded">
         PC Builder
       </button>
       <div className="cart-icon ml-4 relative">
@@ -63,11 +91,17 @@ const Header = () => {
           </div>
         )}
       </div>
+      <SearchResultsModal
+        isOpen={isModalOpen}
+        searchResults={searchResults}
+        onClose={closeModal}
+      />
     </header>
   );
 };
 
 export default Header;
+
 
 
 // import React from 'react';

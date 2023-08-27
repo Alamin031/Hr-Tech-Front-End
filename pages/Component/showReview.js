@@ -118,9 +118,14 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import CustomerNavbar from './customerNavbar';
 
 const ShowReview = () => {
   const [reviewsData, setReviewsData] = useState([]);
+  const [editingReviewId, setEditingReviewId] = useState(null);
+  const [updatedReviewText, setUpdatedReviewText] = useState('');
+  const [showUpdateSuccessMessage, setShowUpdateSuccessMessage] = useState(false);
+
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -153,9 +158,37 @@ const ShowReview = () => {
     }
   };
 
-  console.log('reviewsData:', reviewsData);
+  const handleEditReview = (reviewId, reviewText) => {
+    setEditingReviewId(reviewId);
+    setUpdatedReviewText(reviewText);
+  };
+
+  const handleReviewUpdate = async (reviewId) => {
+    try {
+      const response = await axios.put(`http://localhost:3000/customer/update_review_info/${reviewId}`, {
+        Review: updatedReviewText,
+      });
+      console.log('Review updated:', response.data);
+
+            // Show the success message
+      setShowUpdateSuccessMessage(true);
+      // After successful update, you may want to update the reviewsData state to reflect the changes
+      // You can fetch the updated reviewsData again or directly update the review in the existing state
+      setEditingReviewId(null);
+      setUpdatedReviewText('');
+
+            // Hide the success message after a few seconds
+      setTimeout(() => {
+        setShowUpdateSuccessMessage(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Error updating review:', error);
+    }
+  };
 
   return (
+    <> 
+    <CustomerNavbar/>
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Review List</h2>
       <h2 className="text-2xl font-bold mb-4">Reviews</h2>
@@ -176,30 +209,61 @@ const ShowReview = () => {
             {reviewsData.map((review) => (
               <tr key={review.id}>
                 <td className="border px-4 py-2">{review.id}</td>
-                <td className="border px-4 py-2">{review.Review}</td>
+                <td className="border px-4 py-2">
+                  {editingReviewId === review.id ? (
+                    <input
+                      type="text"
+                      value={updatedReviewText}
+                      onChange={(e) => setUpdatedReviewText(e.target.value)}
+                      className="w-full border rounded"
+                    />
+                  ) : (
+                    review.Review
+                  )}
+                </td>
                 <td className="border px-4 py-2">{review.rating}</td>
                 <td className="border px-4 py-2">{review.Date}</td>
                 <td className="border px-4 py-2">
-                <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleDeleteReview(review.id)}
-                >
-                Delete
-                 </button>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Edit
+                  <button
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => handleDeleteReview(review.id)}
+                  >
+                    Delete
                   </button>
+                  {editingReviewId === review.id ? (
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                      onClick={() => handleReviewUpdate(review.id)}
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                      onClick={() => handleEditReview(review.id, review.Review)}
+                    >
+                      Edit
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
+
+{showUpdateSuccessMessage && (
+        <div className="bg-green-500 text-white font-bold py-2 px-4 rounded mt-4">
+          Review updated successfully!
+        </div>
+      )}
     </div>
+    </>
   );
 };
 
 export default ShowReview;
+
 
 
 
