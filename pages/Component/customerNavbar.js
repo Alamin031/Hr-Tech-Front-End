@@ -27,6 +27,7 @@ const CustomerNavbar = () => {
 
   async function fetchData() {
     try {
+      
       const response = await axios.get(`http://localhost:3000/customer/getuser/${user.email}`);
       const jsonData = response.data;
       console.log(jsonData)

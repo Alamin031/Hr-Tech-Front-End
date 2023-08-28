@@ -1,28 +1,13 @@
 import Head from 'next/head'
-import Layout from '../../Layout/layout'
-// import Link from 'next/link'
-// import { useRouter } from 'next/router'
-// import React, { useState } from 'react'
-// import axios from 'axios'
-// import { useForm } from 'react-hook-form'
-// import { yupResolver } from '@hookform/resolvers/yup'
-// import { adminLoginSchema } from '../../Component/Validation/Validation'
-// import { toast } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
-// import { useCookies } from 'react-cookie'
-// import { useEffect } from 'react'
-// import { useAuth } from '../../Context/UserContext'
-// import { useAdminAuth } from '../../Context/AdminContext'
-// import { useUserAuth } from '../../Context/UserContext'
-// import { useAdminLogin } from '../../Context/AdminLoginContext'
-// import { useUserLogin } from '../../Context/UserLoginContext'
-// import { useAdminRegister } from '../../Context/AdminRegisterContext'
-// import { useUserRegister } from '../../Context/UserRegisterContext'
+import AdminNavbar from './AdminNavbar'
+
 
 export default function adminDashbord() {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
+
     return (
         <div>
-            <Layout>
+            <AdminNavbar/>
                 <div className="flex flex-col items-center justify-center min-h-screen py-2">
                     <Head>
                         <title>Admin Dashbord</title>
@@ -93,7 +78,8 @@ export default function adminDashbord() {
                         </div>
                     </main>
                     </div>
-            </Layout>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
         </div>
     )
 }

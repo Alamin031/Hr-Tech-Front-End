@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchResultsModal from './SearchResultsModal';
-
 
 const Header = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -9,24 +8,29 @@ const Header = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
   };
 
-  const handleSearch = async () => {
-    try {
-      console.log('Searching for:', searchQuery);
-      const response = await axios.get(`http://localhost:3000/customer/search/${searchQuery}`);
-      console.log('Search results:', response.data);
-      setSearchResults(response.data);
-      setIsModalOpen(true); // Open the modal with search results
-      console.log('Search results:', searchResults);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-      setSearchResults([]);
+  useEffect(() => {
+    const handleSearch = async () => {
+      try {
+        console.log('Searching for:', searchQuery);
+        const response = await axios.get(`http://localhost:3000/customer/search/${searchQuery}`);
+        console.log('Search results:', response.data);
+        setSearchResults(response.data);
+        setIsModalOpen(true); // Open the modal with search results
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+        setSearchResults([]);
+      }
+    };
+
+    if (searchQuery.trim() !== '') {
+      handleSearch();
     }
-  };
+  }, [searchQuery]);
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -59,12 +63,6 @@ const Header = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="px-2 py-1 border border-gray-400 rounded"
         />
-        <button
-          className="search-button px-4 py-1 bg-blue-500 text-white rounded"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
       </div>
             <button className="pc-builder-button px-4 py-1 bg-purple-600 text-white rounded">
         PC Builder
@@ -95,7 +93,11 @@ const Header = () => {
         isOpen={isModalOpen}
         searchResults={searchResults}
         onClose={closeModal}
-      />
+      >
+        {searchResults.length === 0 && (
+          <p className="text-red-500">No products found for the search query.</p>
+        )}
+      </SearchResultsModal>
     </header>
   );
 };
