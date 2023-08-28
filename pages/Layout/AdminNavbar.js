@@ -191,8 +191,17 @@ const AdminNavbar = () => {
   const router = useRouter();
   const { user, adminlogout, checkUser } = useAuth();
 
-  useEffect(() => {
-    fetchData();
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+    useEffect(() => {
+    
+    console.log("CheckUser::::"+checkUser())
+    if (!checkUser()) {
+      router.push('/');
+    }
+    else {fetchData();}
   }, []);
 
   async function fetchData() {
@@ -239,7 +248,7 @@ const AdminNavbar = () => {
                 <li>
                   <a className="justify-between">
                     <span className="badge">Hello</span>
-                    {jsonData.firstName} {jsonData.lastName}
+                    {jsonData.name} {jsonData.lastName}
                   </a>
                 </li>
                 <li>
@@ -283,6 +292,12 @@ const AdminNavbar = () => {
               </button>
             </li>
             <li>
+              <button onClick={() => router.push('/Component/admin/empSignUpForm')} className="flex p-3 text-gray-800 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700" role="menuitem">
+                <MdMan className="w-6 h-6 mr-2 text-gray-500" />
+                <span>Add Employee</span>
+              </button>
+            </li>
+            <li>
               <button onClick={() => router.push('#')} className="flex p-3 text-gray-800 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700" role="menuitem">
                 <MdMan className="w-6 h-6 mr-2 text-gray-500" />
                 <span>Employee</span>
@@ -311,12 +326,12 @@ const AdminNavbar = () => {
       </aside>
 
       <div className="p-4 sm:ml-64">
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        {/* <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
           <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">Welcome to Flowbite Dashboard</h1>
           <p className="mt-2 text-gray-600 dark:text-gray-300">
             This is a placeholder content for your dashboard. Feel free to replace it with your actual content.
           </p>
-        </div>
+        </div> */}
       </div>
     </>
   );
