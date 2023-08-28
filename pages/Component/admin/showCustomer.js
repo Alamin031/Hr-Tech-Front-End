@@ -322,6 +322,8 @@ const CustomerList = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [showReviewsTab, setShowReviewsTab] = useState(false);
+  const [customerOrders, setCustomerOrders] = useState([]);
+
 
   useEffect(() => {
     // Fetch customers from API or use static data
@@ -451,6 +453,28 @@ const CustomerList = () => {
       console.error('Error fetching customer reviews:', error);
     }
   };
+
+
+ const handleShowOrders = async (customerId) => {
+  try {
+    const response = await fetch(`http://localhost:3000/customer/getorderss/${customerId}`);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch customer orders');
+    }
+
+    const data = await response.json();
+    console.log("response data:", data); // Log the parsed JSON data
+
+    const orders = data[0]?.orders || []; // Access the orders array correctly
+
+    setCustomerOrders(orders);
+  } catch (error) {
+    console.error('Error fetching customer orders:', error);
+  }
+};
+
+  
   return (
     <div className="container p-4">
       <h2 className="text-2xl font-bold mb-4">Customer List</h2>
@@ -503,6 +527,13 @@ const CustomerList = () => {
                     >
                       Show Review
                     </button>
+                    <button
+  className="btn bg-purple-500 text-white rounded md:ml-2 lg:ml-0"
+  onClick={() => handleShowOrders(CustomerEntity.customerid)}
+>
+  Show Orders
+</button>                  
+
                     </th>
                   </td>
                 </tr>
@@ -612,6 +643,29 @@ const CustomerList = () => {
           </div>
         </div>
       )}
+{customerOrders.length > 0 && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="bg-white p-4 rounded">
+      <h3 className="text-xl font-bold mb-2">Customer Orders</h3>
+      <ul>
+        {customerOrders.map((order) => (
+          <li key={order.id}>
+            Order ID: {order.id}, Total Amount: {order.totalAmount}, Order Status: {order.orderStatus}
+          </li>
+        ))}
+      </ul>
+      <button
+        className="px-4 py-2 bg-red-500 text-white rounded mt-2"
+        onClick={() => setCustomerOrders([])}
+      >
+        Close Orders
+      </button>
+    </div>
+  </div>
+)}
+
+
+
     </div>
   );
 };

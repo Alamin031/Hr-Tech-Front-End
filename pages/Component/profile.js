@@ -427,14 +427,15 @@
 import Layout from '../Layout/layout';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import SideNavbar from './SideNavbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
 import axios from 'axios';
 import CustomerNavbar from './customerNavbar';
 import Footer from '../Layout/Footer';
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/authcontext';
+import dynamic from "next/dynamic";
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 const initialProfileData = {
   firstName: '',
@@ -647,7 +648,8 @@ const initialProfileData = {
 
   return (
     <> 
-      <CustomerNavbar/>
+    <Title page="Profile"></Title>
+    <CustomerNavbar/>
     <div className=" p-8 mt-96">
     {/* <div className=""> */}
       <div className="max-w-md mx-auto bg-white rounded p-8 shadow-md -mt-96 ">

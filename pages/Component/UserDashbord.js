@@ -3,11 +3,20 @@ import CustomerNavbar from "./customerNavbar"
 import ProductForm from "./ProductList"
 import Footer from "../Layout/Footer"
 import CardComponent from "./test"
+import dynamic from 'next/dynamic'
+
+
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 
 export default function Dashboard() {
     return (
       <>
+    <Title page="Dashbord"></Title>
+
+
       <div>
         <CustomerNavbar/>
         <SideNavbar/>

@@ -345,6 +345,12 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/authcontext';
 import CustomerNavbar from './customerNavbar';
+import dynamic from 'next/dynamic'
+
+
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -379,12 +385,16 @@ const OrderList = () => {
       useEffect(() => {
       if (!checkUser()) 
   {
-      router.push('/');
+      router.push('/Component/LoginForm');
   }
   else {
     fetchOrders();
   }
 }, []);
+
+// useEffect(() => {
+//   fetchOrders();
+// }, []);
 
     const fetchOrders = async () => {
       try {
@@ -524,6 +534,7 @@ const handleSubmitReview = async () => {
 
   return (
     <> 
+    <Title page="Show Order"></Title>
     <CustomerNavbar />
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Order List</h2>

@@ -131,8 +131,34 @@ export const AuthProvider = ({ children }) => {
       console.error('error failed: ', error);
     }
   }
+  const adminlogout = () => {
+
+    adSignOut()
+  };
+  async function adSignOut() {
+    try {
+      const response = await axios.post('http://localhost:3000/admin/signout',
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          withCredentials: true
+        }
+      );
+      console.log("cookie available?"+document.cookie)
+      console.log(response)
+        setUser(null);
+        // document.cookie = null;
+        const cookies = Cookies.get();
+        for (const cookieName in cookies) {
+          Cookies.remove(cookieName);
+        }
+        console.log("cookie distory?"+document.cookie)
+        router.push('/Component/LoginForm');
+    } catch (error) {
+      console.error('error failed: ', error);
+    }
+  }
   return (
-    <AuthContext.Provider value={{ user, login, logout,checkUser }}>
+    <AuthContext.Provider value={{ user, login, logout,checkUser,adminlogout }}>
       {children}
     </AuthContext.Provider>
   );

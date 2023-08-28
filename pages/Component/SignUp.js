@@ -6,6 +6,10 @@ import Layout from '../Layout/layout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { el } from 'date-fns/locale';
+import dynamic from "next/dynamic";
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 
 const SignUpForm = () => {
@@ -134,6 +138,7 @@ const SignUpForm = () => {
   });
   return (
     <div className="">
+    <Title page="SignUp"></Title>
     <Layout>
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
 

@@ -4,12 +4,17 @@ import axios from "axios";
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/authcontext';
 import Cookies from "js-cookie"; // Import the Cookies library
+import SearchResultsModal from '../Layout/SearchResultsModal';
 
 
 const CustomerNavbar = () => {
   const [jsonData, setJsonData] = useState(null);
   const router = useRouter();
   const { user, logout, checkUser } = useAuth();
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
   useEffect(() => {
@@ -27,8 +32,7 @@ const CustomerNavbar = () => {
 
   async function fetchData() {
     try {
-      
-      const response = await axios.get(`http://localhost:3000/customer/getuser/${user.email}`);
+      const response = await axios.get(`http://localhost:3000/customer/showprofile/${user.email}`);
       const jsonData = response.data;
       console.log(jsonData)
       setJsonData(jsonData);
@@ -36,7 +40,28 @@ const CustomerNavbar = () => {
       console.error(error);
     }
   }
+  useEffect(() => {
+    const handleSearch = async () => {
+      try {
+        console.log('Searching for:', searchQuery);
+        const response = await axios.get(`http://localhost:3000/customer/search/${searchQuery}`);
+        console.log('Search results:', response.data);
+        setSearchResults(response.data);
+        setIsModalOpen(true); // Open the modal with search results
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+        setSearchResults([]);
+      }
+    };
 
+    if (searchQuery.trim() !== '') {
+      handleSearch();
+    }
+  }, [searchQuery]);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   
 
   const handleLogout = () => {
@@ -56,8 +81,14 @@ const CustomerNavbar = () => {
           </div>
           <div className="flex-none gap-2">
             <div className="form-control">
-              <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-            </div>
+            <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="px-2 py-1 border border-gray-400 rounded"
+        />
+        </div>
     
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -74,9 +105,8 @@ const CustomerNavbar = () => {
                 <button className="btn btn-primary btn-block">View cart</button>
               </div>
             </div>
-          </div>
-        </div>
-            
+             </div>
+           </div>       
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
@@ -96,6 +126,15 @@ const CustomerNavbar = () => {
               </ul>
             </div>
           </div>
+          <SearchResultsModal
+        isOpen={isModalOpen}
+        searchResults={searchResults}
+        onClose={closeModal}
+      >
+        {searchResults.length === 0 && (
+          <p className="text-red-500">No products found for the search query.</p>
+        )}
+      </SearchResultsModal>
         </div>
     }
     {/* <SideNavbar/> */}

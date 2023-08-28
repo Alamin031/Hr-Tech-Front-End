@@ -1,28 +1,25 @@
 import Link from "next/link";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import { OTPsendEnvent } from "./OtpEnterForgetPass";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
-
-// const PageTitle = dynamic(()=>import('../PageTitle/title'),
-// {
-//   ssr : false,
-// })
-
+const Layout = dynamic(() => import('../Layout/layout'), {
+    ssr: false
+  })
+const Title = dynamic(() => import('../Layout/title'), {
+    ssr: false
+  })
 let OTP ;
 let phoneNumber;
-
 export function returnOTP()
 {
   return OTP;
 }
-
 export function returnPhnNum()
 {
   return phoneNumber;
 }
-
 export function setOTP (otpcode, phonenumber)
 {
     phoneNumber = phonenumber;  
@@ -76,26 +73,40 @@ export default function ForgetPassProfileSearchPage()
         }
     }
 
-    return (
-        <>
-        {/* <PageTitle PageName = "Search Profile"></PageTitle> */}
-        <div style={{ color: 'Black', margin: '0 auto' , textAlign: 'center', padding: '20px'}}>
-            <form onSubmit={handleFormSubmit} style={{ textAlign: 'center', padding: '20px', border: 'none', borderRadius: '8px' }}>
-            {/* <HeaderForPage></HeaderForPage> */}
-            <h2>Profile Search</h2>
-            <div>
-                <input type="text" name="searchValue" onChange={handleChangeSearchValue} placeholder="Enter email/Phone..."/>
-                <br />
-                <span>{errorEmailPhn && <b>{errorEmailPhn}</b>}</span>
-            </div>
-            <br></br>
-            <button type="submit">Search</button>
-            <div className="BackToLogin">
-                <Link style={{textDecoration: 'none'}} href="/">Have an Account? Login..</Link>
-                {/* <FooterForPage></FooterForPage> */}
-            </div>
-            </form>
+  return (
+    <>
+        <Title page="Forgetpassword" ></Title>
+        <Layout> 
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form onSubmit={handleFormSubmit} className="bg-white shadow-md rounded-md p-8 text-center">
+        <h2 className="text-2xl font-semibold">Profile Search</h2>
+        <div className="my-4">
+          <input
+            type="text"
+            name="searchValue"
+            onChange={handleChangeSearchValue}
+            placeholder="Enter email/Phone..."
+            className="w-full px-3 py-2 border rounded-md focus:outline-none"
+          />
+          {errorEmailPhn && <span className="text-red-500">{errorEmailPhn}</span>}
         </div>
-        </>
-    )
+        <button
+          type="submit"
+          className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+        >
+          Search
+        </button>
+        <div className="mt-4">
+          <Link href="/Component/LoginForm" className="text-blue-500 underline">
+            Have an Account? Login..
+          </Link>
+        </div>
+      </form>
+    </div>
+    </Layout>
+
+    </>
+  );
 }
+
+

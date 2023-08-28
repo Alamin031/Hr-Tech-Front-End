@@ -1,15 +1,41 @@
-import '@/styles/globals.css'
+// import '@/styles/globals.css'
 
 
 
 
+// import { AuthProvider } from './utils/authcontext';
+
+// export default function App({ Component, pageProps }) {
+//   return(    <AuthProvider>
+//   <Component {...pageProps} />
+//   </AuthProvider>);
+// }
+
+
+// pages/_app.js
+import Head from 'next/head';
 import { AuthProvider } from './utils/authcontext';
 
-export default function App({ Component, pageProps }) {
-  return(    <AuthProvider>
-  <Component {...pageProps} />
-  </AuthProvider>);
+import '@/styles/globals.css';
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <Head>
+        {/* Include Flowbite CSS */}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+        {/* Include Flowbite JavaScript */}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+      </Head>
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
+    </>
+  );
 }
+
+export default MyApp;
+
 
 // import { CartProvider } from './Component/CartContext';
 

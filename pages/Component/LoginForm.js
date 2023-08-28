@@ -121,6 +121,10 @@ import Layout from '../Layout/layout';
 import { useAuth } from '../utils/authcontext';
 import { tr } from 'date-fns/locale';
 import { set } from 'date-fns';
+import dynamic from 'next/dynamic';
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 
 const LoginForm = () => {
@@ -236,6 +240,9 @@ const LoginForm = () => {
   // }
 
   return (
+    <>
+   <Title page="Login"></Title>
+
     <div className="">
       <Layout>
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -281,10 +288,16 @@ const LoginForm = () => {
                 Sign Up
               </Link>
             </p>
+            <p className="mt-2 text-sm text-center">
+           <Link href="/Component/ForgetProfileSearch" className="text-blue-500 underline">
+             Forgot Password?
+          </Link>
+           </p>
           </form>
         </div>
       </Layout>
     </div>
+    </>
   );
 };
 

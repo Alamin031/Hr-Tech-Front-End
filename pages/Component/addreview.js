@@ -1,6 +1,11 @@
-// components/ReviewForm.js
 import React, { useState } from 'react';
 import { format } from 'date-fns'; // Used for date formatting
+import dynamic from 'next/dynamic'
+
+
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 const ReviewForm = () => {
   const [name, setName] = useState('');
@@ -27,6 +32,10 @@ const ReviewForm = () => {
   };
 
   return (
+    <> 
+            <Title page="Add Review"></Title>
+
+
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Name:</label>
@@ -80,6 +89,7 @@ const ReviewForm = () => {
         Submit
       </button>
     </form>
+    </>
   );
 };
 

@@ -119,6 +119,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CustomerNavbar from './customerNavbar';
+import dynamic from 'next/dynamic';
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 const ShowReview = () => {
   const [reviewsData, setReviewsData] = useState([]);
@@ -188,6 +192,7 @@ const ShowReview = () => {
 
   return (
     <> 
+    <Title page="showReview"></Title>
     <CustomerNavbar/>
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Review List</h2>

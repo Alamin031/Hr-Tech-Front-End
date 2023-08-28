@@ -117,8 +117,14 @@
 
 
 import React, { useState, useEffect } from 'react';
-import Layout from '../Layout/layout';
 import axios from 'axios';
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import('../Layout/layout'), {
+  ssr: false
+})
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 const ProductDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -200,6 +206,7 @@ const ProductDetails = ({ product }) => {
 
   return (
     <>
+        <Title page="ProductDetails"></Title>
       <Layout>
         <div className="flex p-4">
           <div className="w-1/2 p-4">

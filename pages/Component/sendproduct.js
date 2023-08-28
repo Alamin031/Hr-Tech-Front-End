@@ -5,6 +5,11 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import CustomerNavbar from './customerNavbar';
 import Footer from '../Layout/Footer';
+import dynamic from 'next/dynamic';
+
+const Title = dynamic(() => import('../Layout/title'), {
+  ssr: false
+})
 
 const SindForm = () => {
   const [loading, setLoading] = useState(false);
@@ -74,6 +79,9 @@ const SindForm = () => {
   });
   return (
     <div className="">
+              <Title page="Send"></Title>
+
+
       <CustomerNavbar/>
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
 

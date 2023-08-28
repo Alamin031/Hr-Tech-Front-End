@@ -131,7 +131,9 @@
 // export default SideNavbar;
 
 import React from 'react';
+import { useRouter } from 'next/router';
 const SideNavbar = () => {
+  const router = useRouter();
   return (
     <div className="navbar bg-slate-300">
       <div className="navbar-start">
@@ -304,7 +306,6 @@ const SideNavbar = () => {
           </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
       </div>
     </div>
   );
