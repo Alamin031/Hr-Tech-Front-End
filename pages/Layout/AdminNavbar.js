@@ -196,7 +196,7 @@ const AdminNavbar = () => {
   // }, []);
 
     useEffect(() => {
-    
+
     console.log("CheckUser::::"+checkUser())
     if (!checkUser()) {
       router.push('/');

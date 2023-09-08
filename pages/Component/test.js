@@ -212,7 +212,7 @@ const CardComponent = () => {
       </div>
       {/* Contact Card */}
       <div className="card w-96 bg-base-100 shadow-xl mb-4">
-      <button onClick={() => router.push('./contact')} className="card-body text-center flex items-center justify-center btn">
+      <button onClick={() => router.push('./ContactForm')} className="card-body text-center flex items-center justify-center btn">
 
           <div className="mr-2">
             <MdOutlineSettings className="h-6 w-6" />

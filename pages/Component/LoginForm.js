@@ -249,6 +249,7 @@ const LoginForm = () => {
           <form className="p-8 bg-white shadow-md rounded-md" onSubmit={handleSubmit}>
             <h2 className="mb-4 text-2xl font-semibold text-center">Login</h2>
             <div className="mb-4">
+              <img src="/images/Logo.png" alt="logo" className="w-32 h-32 mx-auto" />
               <label htmlFor="email" className="block mb-2 text-sm font-medium">
                 Email
               </label>
